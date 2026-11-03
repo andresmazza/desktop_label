@@ -8,6 +8,7 @@ Widget (plasmoide) para **KDE Plasma 6** que muestra el nombre del escritorio vi
 
 - Muestra el nombre del escritorio virtual activo y se actualiza al cambiar de escritorio.
 - Tooltip con la posición del escritorio (por ejemplo, "Escritorio 2 de 4").
+- Clic sobre el widget: muestra una vista previa de las ventanas del escritorio actual. Clic en una vista previa para ir a esa ventana; clic central para cerrarla.
 - Rueda del ratón sobre el widget para cambiar de escritorio (cíclico).
 - Configurable: tamaño de letra, negrita y color del texto.
 - Funciona en Wayland y X11.
@@ -48,9 +49,25 @@ plasmashell --replace &
 
 1. Clic derecho en el panel o en el escritorio → **Añadir o gestionar widgets**.
 2. Busca **"Nombre del escritorio"** y arrástralo a donde quieras.
-3. Con la rueda del ratón sobre el widget cambias de escritorio.
+3. Haz clic en el widget para ver las ventanas del escritorio actual.
+4. Con la rueda del ratón sobre el widget cambias de escritorio.
 
 Los nombres de los escritorios se cambian en **Configuración del sistema → Escritorios virtuales**.
+
+### Vista previa de ventanas
+
+Al hacer clic sobre el widget se abre un panel con una miniatura de cada ventana del escritorio y la actividad actuales. Las más recientes aparecen primero.
+
+| Acción | Resultado |
+|---|---|
+| Clic en el widget | Abre o cierra el panel |
+| Clic en una miniatura | Va a esa ventana y cierra el panel |
+| Clic central en una miniatura | Cierra esa ventana |
+
+- Las miniaturas se actualizan en tiempo real mientras el panel está abierto. Con el panel cerrado no se generan, así que no consumen recursos.
+- La ventana activa aparece resaltada y con el título en negrita.
+- Las ventanas minimizadas se muestran con el icono de la aplicación.
+- En Wayland las miniaturas se obtienen por PipeWire, igual que en el gestor de tareas de Plasma. Si PipeWire no está disponible, se muestra el icono de la aplicación.
 
 ## Configuración
 
@@ -89,6 +106,7 @@ kpackagetool6 -t Plasma/Applet -r org.andres.desktopname
         │   └── config.qml             # Registro de la página de configuración
         └── ui/
             ├── main.qml               # Widget
+            ├── PipeWireThumbnail.qml  # Miniatura de ventana (Wayland)
             └── configGeneral.qml      # Formulario de configuración
 ```
 
@@ -110,6 +128,7 @@ GPL-2.0-or-later. Consulta el archivo [LICENSE](LICENSE).
 **Desktop Name** is a KDE Plasma 6 widget that shows the name of the current virtual desktop.
 
 - Updates automatically when you switch desktops; scroll over it to switch desktops.
+- Click it to see live previews of the windows on the current desktop: click a preview to switch to that window, middle-click to close it.
 - Configurable font size, bold and text color.
 - Works on Wayland and X11.
 
