@@ -1,137 +1,122 @@
-# Nombre del escritorio
+# Desktop Name
 
-Widget (plasmoide) para **KDE Plasma 6** que muestra el nombre del escritorio virtual actual.
+A **KDE Plasma 6** widget (plasmoid) that shows the name of the current virtual desktop.
 
-![Demo: el widget en el panel superior mostrando el escritorio "2"](screenshots/demo.png)
+![Demo: the widget in the top panel showing desktop "2"](screenshots/demo.png)
 
-## Características
+## Features
 
-- Muestra el nombre del escritorio virtual activo y se actualiza al cambiar de escritorio.
-- Tooltip con la posición del escritorio (por ejemplo, "Escritorio 2 de 4").
-- Clic sobre el widget: muestra una vista previa de las ventanas del escritorio actual. Clic en una vista previa para ir a esa ventana; clic central para cerrarla.
-- Rueda del ratón sobre el widget para cambiar de escritorio (cíclico).
-- Configurable: tamaño de letra, negrita y color del texto.
-- Funciona en Wayland y X11.
+- Shows the name of the active virtual desktop and updates when you switch desktops.
+- Tooltip with the desktop position (for example, "Desktop 2 of 4").
+- Click the widget to see a preview of the windows on the current desktop. Click a preview to switch to that window; middle-click to close it.
+- Scroll over the widget to switch desktops (wraps around).
+- Configurable font size, bold and text color.
+- Works on Wayland and X11.
 
-## Requisitos
+## Requirements
 
-- KDE Plasma 6.0 o superior
+- KDE Plasma 6.0 or later
 
-## Instalación
+## Installation
 
-### Desde la KDE Store
+### From the KDE Store
 
-1. Clic derecho en el panel o en el escritorio → **Añadir o gestionar widgets**.
-2. **Obtener widgets nuevos** → **Descargar widgets nuevos de Plasma**.
-3. Busca **"Nombre del escritorio"** e instálalo.
+1. Right-click the panel or desktop → **Add or Manage Widgets**.
+2. **Get New Widgets** → **Download New Plasma Widgets**.
+3. Search for **"Desktop Name"** and install it.
 
-### Desde el archivo `.plasmoid`
+### From the `.plasmoid` file
 
 ```bash
 kpackagetool6 -t Plasma/Applet -i org.andres.desktopname.plasmoid
 ```
 
-### Desde el código fuente
+### From source
 
 ```bash
-git clone <url-del-repositorio>
-cd <repositorio>
+git clone https://github.com/andresmazza/desktop_label.git
+cd desktop_label
 kpackagetool6 -t Plasma/Applet -i org.andres.desktopname
 ```
 
-Si el widget no aparece en la lista, reinicia Plasma:
+If the widget does not show up in the list, restart Plasma:
 
 ```bash
 plasmashell --replace &
 ```
 
-## Uso
+## Usage
 
-1. Clic derecho en el panel o en el escritorio → **Añadir o gestionar widgets**.
-2. Busca **"Nombre del escritorio"** y arrástralo a donde quieras.
-3. Haz clic en el widget para ver las ventanas del escritorio actual.
-4. Con la rueda del ratón sobre el widget cambias de escritorio.
+1. Right-click the panel or desktop → **Add or Manage Widgets**.
+2. Search for **"Desktop Name"** and drag it wherever you want.
+3. Click the widget to see the windows on the current desktop.
+4. Scroll over the widget to switch desktops.
 
-Los nombres de los escritorios se cambian en **Configuración del sistema → Escritorios virtuales**.
+Desktop names are changed in **System Settings → Virtual Desktops**.
 
-### Vista previa de ventanas
+### Window preview
 
-Al hacer clic sobre el widget se abre un panel con una miniatura de cada ventana del escritorio y la actividad actuales. Las más recientes aparecen primero.
+Clicking the widget opens a panel with a thumbnail of each window on the current desktop and activity. The most recently used windows come first.
 
-| Acción | Resultado |
+| Action | Result |
 |---|---|
-| Clic en el widget | Abre o cierra el panel |
-| Clic en una miniatura | Va a esa ventana y cierra el panel |
-| Clic central en una miniatura | Cierra esa ventana |
+| Click the widget | Opens or closes the panel |
+| Click a thumbnail | Switches to that window and closes the panel |
+| Middle-click a thumbnail | Closes that window |
 
-- Las miniaturas se actualizan en tiempo real mientras el panel está abierto. Con el panel cerrado no se generan, así que no consumen recursos.
-- La ventana activa aparece resaltada y con el título en negrita.
-- Las ventanas minimizadas se muestran con el icono de la aplicación.
-- En Wayland las miniaturas se obtienen por PipeWire, igual que en el gestor de tareas de Plasma. Si PipeWire no está disponible, se muestra el icono de la aplicación.
+- Thumbnails update in real time while the panel is open. They are not generated while it is closed, so they use no resources.
+- The active window is highlighted and its title is shown in bold.
+- Minimized windows are shown with the application icon.
+- On Wayland, thumbnails come from PipeWire, just like in the Plasma task manager. If PipeWire is not available, the application icon is shown instead.
 
-## Configuración
+## Configuration
 
-Clic derecho sobre el widget → **Configurar Nombre del escritorio…**
+Right-click the widget → **Configure Desktop Name…**
 
-| Opción | Descripción | Por defecto |
+| Option | Description | Default |
 |---|---|---|
-| Tamaño de letra | Automático (tamaño del tema) o manual, de 6 a 96 pt | Automático |
-| Negrita | Muestra el texto en negrita | Activado |
-| Color | Color del tema o uno personalizado (admite transparencia) | Color del tema |
+| Font size | Automatic (theme size) or manual, from 6 to 96 pt | Automatic |
+| Bold | Shows the text in bold | On |
+| Color | Theme color or a custom one (supports transparency) | Theme color |
 
-## Actualizar
+## Update
 
 ```bash
 kpackagetool6 -t Plasma/Applet -u org.andres.desktopname.plasmoid
 ```
 
-## Desinstalar
+## Uninstall
 
 ```bash
 kpackagetool6 -t Plasma/Applet -r org.andres.desktopname
 ```
 
-## Estructura
+## Structure
 
 ```
 .
 ├── README.md
 ├── LICENSE
-├── screenshots/                       # Capturas para el README
-└── org.andres.desktopname/            # Paquete del widget
-    ├── metadata.json                  # Nombre, versión e icono del widget
+├── screenshots/                       # Screenshots for the README
+└── org.andres.desktopname/            # Widget package
+    ├── metadata.json                  # Widget name, version and icon
     └── contents/
         ├── config/
-        │   ├── main.xml               # Opciones y valores por defecto
-        │   └── config.qml             # Registro de la página de configuración
+        │   ├── main.xml               # Options and default values
+        │   └── config.qml             # Registers the settings page
         └── ui/
             ├── main.qml               # Widget
-            ├── PipeWireThumbnail.qml  # Miniatura de ventana (Wayland)
-            └── configGeneral.qml      # Formulario de configuración
+            ├── PipeWireThumbnail.qml  # Window thumbnail (Wayland)
+            └── configGeneral.qml      # Settings form
 ```
 
-### Generar el archivo `.plasmoid`
+### Building the `.plasmoid` file
 
 ```bash
 cd org.andres.desktopname
 zip -r ../org.andres.desktopname.plasmoid metadata.json contents
 ```
 
-## Licencia
+## License
 
-GPL-2.0-or-later. Consulta el archivo [LICENSE](LICENSE).
-
----
-
-## English
-
-**Desktop Name** is a KDE Plasma 6 widget that shows the name of the current virtual desktop.
-
-- Updates automatically when you switch desktops; scroll over it to switch desktops.
-- Click it to see live previews of the windows on the current desktop: click a preview to switch to that window, middle-click to close it.
-- Configurable font size, bold and text color.
-- Works on Wayland and X11.
-
-**Install:** `kpackagetool6 -t Plasma/Applet -i org.andres.desktopname.plasmoid`, then right-click the panel → *Add or Manage Widgets* → search for "Nombre del escritorio".
-
-**Remove:** `kpackagetool6 -t Plasma/Applet -r org.andres.desktopname`
+GPL-2.0-or-later. See the [LICENSE](LICENSE) file.

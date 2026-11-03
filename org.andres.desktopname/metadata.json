@@ -1,13 +1,13 @@
 {
     "KPlugin": {
         "Id": "org.andres.desktopname",
-        "Name": "Nombre del escritorio",
-        "Description": "Muestra el nombre del escritorio virtual actual",
+        "Name": "Desktop Name",
+        "Description": "Shows the name of the current virtual desktop",
         "Icon": "virtual-desktops",
         "Authors": [{ "Name": "Andres", "Email": "andres.mazza@gmail.com" }],
         "Category": "Windows and Tasks",
         "License": "GPL-2.0+",
-        "Version": "1.2"
+        "Version": "1.3"
     },
     "KPackageStructure": "Plasma/Applet",
     "X-Plasma-API-Minimum-Version": "6.0"

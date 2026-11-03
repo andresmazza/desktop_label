@@ -15,28 +15,28 @@ KCM.SimpleKCM {
     Kirigami.FormLayout {
         QQC2.CheckBox {
             id: autoSize
-            Kirigami.FormData.label: "Tamaño de letra:"
-            text: "Automático (tema del sistema)"
+            Kirigami.FormData.label: i18n("Font size:")
+            text: i18n("Automatic (system theme)")
         }
         QQC2.SpinBox {
             id: sizeSpin
             enabled: !autoSize.checked
             from: 6
             to: 96
-            textFromValue: (v) => v + " pt"
+            textFromValue: (v) => i18n("%1 pt", v)
             valueFromText: (t) => parseInt(t)
         }
         QQC2.CheckBox {
             id: boldCheck
-            text: "Negrita"
+            text: i18n("Bold")
         }
 
         Item { Kirigami.FormData.isSection: true }
 
         QQC2.CheckBox {
             id: customColor
-            Kirigami.FormData.label: "Color:"
-            text: "Usar color personalizado"
+            Kirigami.FormData.label: i18n("Color:")
+            text: i18n("Use custom color")
         }
         KQControls.ColorButton {
             id: colorButton

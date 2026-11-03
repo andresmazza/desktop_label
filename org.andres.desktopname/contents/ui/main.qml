@@ -13,7 +13,7 @@ PlasmoidItem {
     TaskManager.VirtualDesktopInfo { id: vdInfo }
     TaskManager.ActivityInfo { id: activityInfo }
 
-    // Ventanas del escritorio y actividad actuales
+    // Windows on the current desktop and activity
     TaskManager.TasksModel {
         id: tasksModel
         virtualDesktop: vdInfo.currentDesktop
@@ -32,8 +32,8 @@ PlasmoidItem {
 
     preferredRepresentation: compactRepresentation
     toolTipMainText: desktopName
-    toolTipSubText: "Escritorio " + (currentIndex + 1) + " de " + vdInfo.numberOfDesktops
-        + "\nClic para ver las ventanas"
+    toolTipSubText: i18n("Desktop %1 of %2", currentIndex + 1, vdInfo.numberOfDesktops)
+        + "\n" + i18n("Click to see the windows")
 
     compactRepresentation: Item {
         Layout.minimumWidth: label.implicitWidth + Kirigami.Units.smallSpacing * 2
@@ -53,12 +53,12 @@ PlasmoidItem {
                 : Kirigami.Theme.textColor
         }
 
-        // Clic: abre/cierra la vista previa de ventanas
+        // Click: open/close the window preview
         TapHandler {
             onTapped: root.expanded = !root.expanded
         }
 
-        // Rueda del ratón: cambia de escritorio
+        // Mouse wheel: switch desktop
         WheelHandler {
             onWheel: (event) => {
                 const n = vdInfo.desktopIds.length
@@ -114,7 +114,7 @@ PlasmoidItem {
             width: parent.width - Kirigami.Units.gridUnit * 2
             visible: grid.count === 0
             iconName: "window"
-            text: "No hay ventanas en este escritorio"
+            text: i18n("No windows on this desktop")
         }
     }
 
@@ -124,7 +124,7 @@ PlasmoidItem {
         required property int index
         required property var model
 
-        // En Wayland es un UUID (texto); en X11, un número
+        // On Wayland this is a UUID (string); on X11, a number
         readonly property var winId: model.WinIdList ? model.WinIdList[0] : undefined
 
         width: GridView.view.cellWidth
@@ -164,7 +164,7 @@ PlasmoidItem {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-                // Wayland: miniatura en vivo por PipeWire
+                // Wayland: live thumbnail via PipeWire
                 Loader {
                     id: pipeWireLoader
                     anchors.fill: parent
@@ -174,7 +174,7 @@ PlasmoidItem {
                     onLoaded: item.uuid = Qt.binding(() => cell.winId)
                 }
 
-                // X11: miniatura nativa
+                // X11: native thumbnail
                 Loader {
                     anchors.fill: parent
                     active: root.expanded && !cell.model.IsMinimized && Number.isInteger(cell.winId)
@@ -183,7 +183,7 @@ PlasmoidItem {
                     }
                 }
 
-                // Sin miniatura (minimizada o aún cargando): icono de la aplicación
+                // No thumbnail (minimized or still loading): application icon
                 Kirigami.Icon {
                     anchors.centerIn: parent
                     width: Kirigami.Units.iconSizes.huge
@@ -204,7 +204,7 @@ PlasmoidItem {
             onClicked: (mouseEvent) => {
                 const idx = tasksModel.makeModelIndex(cell.index)
                 if (mouseEvent.button === Qt.MiddleButton) {
-                    // Clic central: cerrar la ventana
+                    // Middle click: close the window
                     tasksModel.requestClose(idx)
                 } else {
                     tasksModel.requestActivate(idx)
