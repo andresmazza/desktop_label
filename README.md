@@ -79,6 +79,17 @@ Right-click the widget → **Configure Desktop Name…**
 | Bold | Shows the text in bold | On |
 | Color | Theme color or a custom one (supports transparency) | Theme color |
 
+## Translations
+
+The widget follows your system language. Available languages: English and Spanish.
+
+To add or update a translation:
+
+1. Run `python3 translate/build.py` to refresh `translate/template.pot` with the current strings.
+2. Copy `template.pot` to `translate/<lang>.po` (for example `fr.po`) or edit an existing one, and fill in every `msgstr`.
+3. Run `python3 translate/build.py` again. It reports missing strings and compiles the translation into `contents/locale/`.
+4. Optionally add `"Name[<lang>]"` and `"Description[<lang>]"` to `metadata.json`.
+
 ## Update
 
 ```bash
@@ -98,9 +109,14 @@ kpackagetool6 -t Plasma/Applet -r org.andres.desktopname
 ├── README.md
 ├── LICENSE
 ├── screenshots/                       # Screenshots for the README
+├── translate/                         # Translation sources
+│   ├── build.py                       # Extracts strings and compiles translations
+│   ├── template.pot                   # Strings to translate (generated)
+│   └── es.po                          # Spanish translation
 └── org.andres.desktopname/            # Widget package
     ├── metadata.json                  # Widget name, version and icon
     └── contents/
+        ├── locale/                    # Compiled translations (generated)
         ├── config/
         │   ├── main.xml               # Options and default values
         │   └── config.qml             # Registers the settings page

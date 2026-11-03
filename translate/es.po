@@ -1,0 +1,39 @@
+# Spanish translation of the Desktop Name widget.
+msgid ""
+msgstr ""
+"Project-Id-Version: org.andres.desktopname\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "General"
+msgstr "General"
+
+msgid "Font size:"
+msgstr "Tamaño de letra:"
+
+msgid "Automatic (system theme)"
+msgstr "Automático (tema del sistema)"
+
+msgid "%1 pt"
+msgstr "%1 pt"
+
+msgid "Bold"
+msgstr "Negrita"
+
+msgid "Color:"
+msgstr "Color:"
+
+msgid "Use custom color"
+msgstr "Usar color personalizado"
+
+msgid "Desktop %1 of %2"
+msgstr "Escritorio %1 de %2"
+
+msgid "Click to see the windows"
+msgstr "Clic para ver las ventanas"
+
+msgid "No windows on this desktop"
+msgstr "No hay ventanas en este escritorio"
